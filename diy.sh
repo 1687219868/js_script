@@ -22,9 +22,9 @@ scripts_base_url_3=https://raw.githubusercontent.com/i-chenzhe/qx/main/
 
 ##############################作者脚本名称（必填）##############################
 # 将相应作者的脚本填写到以下变量中
-my_scripts_list_1="format_share_jd_code.js"
-my_scripts_list_2="jd_priceProtect.js jd_try.js"
-my_scripts_list_3="jd_asus_iqiyi.js jd_getFanslove.js jd_fanslove.js jd_gjmh.js jd_jump-jump.js jd_entertainment.js jd_shake.js"
+my_scripts_list_1="format_share_jd_code.js jd_try.js jd_joy_run.js"
+my_scripts_list_2="jd_priceProtect.js"
+my_scripts_list_3="jd_getFanslove.js jd_fanslove.js jd_gjmh.js jd_entertainment.js jd_shake.js jd_shakeBean.js jd_xmf.js z_superDay.js"
 
 
 ##############################随机函数##########################################
@@ -37,9 +37,13 @@ rand(){
 
 
 
-cd $ScriptsDir   # 在 git_pull.sh 中已经定义 ScriptsDir 此变量，diy.sh 由 git_pull.sh 调用，因此可以直接使用此变量
-index=1
+cd $ScriptsDir
+# 清理过期脚本
+rm -rf ZCY01_jd_try.js
+rm -rf i-chenzhe_jd_asus_iqiyi.js
 
+# 下载脚本
+index=1
 for author in $author_list
 do
   echo -e "开始下载 $author 的脚本"
@@ -93,7 +97,7 @@ fi
 ##############################同步 manual-update.sh ##########################################
 cd $ShellDir
 echo -e "开始更新 manual-update.sh "
-wget -q --no-check-certificate https://raw.githubusercontent.com/qq34347476/js_script/master/manual-update.sh -O manual-update.sh.new
+wget -q --no-check-certificate https://raw.githubusercontent.com/qq34347476/js_script/master/scripts/manual-update.sh -O manual-update.sh.new
 if [ $? -eq 0 ]; then
   mv -f manual-update.sh.new manual-update.sh
   echo -e "更新 manual-update.sh 完成"
